@@ -34,7 +34,7 @@
   <Location />
     AuthName "Nagios Server"
     AuthType OpenID
-    require user <%= node['apache']['allowed_openids'].join(' ') %>
+    require user <%= node['apache']['allowed_openids'].join(' ') %> granted
     AuthOpenIDDBLocation <%= node['apache']['mod_auth_openid']['dblocation'] %>
   </Location>
 <% when "cas" -%>
@@ -47,7 +47,7 @@
 
   <Location />
     AuthType CAS
-    require valid-user
+    require valid-user granted
   </Location>
 <% when "ldap" -%>
   <Location />
@@ -58,14 +58,14 @@
     <% unless node['nagios']['ldap_bind_password'].nil? -%>AuthLDAPBindPassword "<%= node['nagios']['ldap_bind_password'] %>"<% end -%>
     AuthLDAPURL "<%= node['nagios']['ldap_url'] %>"
     AuthzLDAPAuthoritative <%= node['nagios']['ldap_authoritative'] %>
-    require valid-user
+    require valid-user granted
   </Location>
 <% else -%>
   <Location />
     AuthName "Nagios Server"
     AuthType Basic
     AuthUserFile "<%= node['nagios']['conf_dir'] %>/htpasswd.users"
-    require valid-user
+    require valid-user granted
   </Location>
 <% end -%>
 
