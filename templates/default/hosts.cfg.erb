@@ -37,6 +37,9 @@ define host {
   <% if n['nagios']['definition']['parents'] -%>
   parents <%= (n['nagios']['definition']['parents'] || []).join(',') %>
   <% end -%>
+  <% if n['nagios']['definition']['check_command'] -%>
+  check_command <%= n['nagios']['definition']['check_command'] %>
+  <% end -%>
   <% if n['nagios']['definition']['statusmap_image'] -%>
   statusmap_image <%= n['nagios']['definition']['statusmap_image'] %>
   <% end -%>
@@ -62,6 +65,9 @@ define host {
   notifications_enabled <%= n['notifications'] %>
   <% if n['parents'] -%>
   parents <%= (n['parents'] || []).join(',') %>
+  <% end -%>
+  <% if n['check_command'] -%>
+  check_command <%= n['check_command'] %>
   <% end -%>
   <% if n['statusmap_image'] -%>
   statusmap_image <%= n['statusmap_image'] %>
