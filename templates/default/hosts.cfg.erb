@@ -37,6 +37,15 @@ define host {
   <% if n['nagios']['definition']['parents'] -%>
   parents <%= (n['nagios']['definition']['parents'] || []).join(',') %>
   <% end -%>
+  <% if n['nagios']['definition']['statusmap_image'] -%>
+  statusmap_image <%= n['nagios']['definition']['statusmap_image'] %>
+  <% end -%>
+  <% if n['nagios']['definition']['icon_image'] -%>
+  icon_image <%= n['nagios']['definition']['icon_image'] %>
+  <% end -%>
+  <% if n['nagios']['definition']['vrml_image'] -%>
+  vrml_image <%= n['nagios']['definition']['vrml_image'] %>
+  <% end -%>
   <% end -%>
 }
 <% end -%>
@@ -53,6 +62,15 @@ define host {
   notifications_enabled <%= n['notifications'] %>
   <% if n['parents'] -%>
   parents <%= (n['parents'] || []).join(',') %>
+  <% end -%>
+  <% if n['statusmap_image'] -%>
+  statusmap_image <%= n['statusmap_image'] %>
+  <% end -%>
+  <% if n['icon_image'] -%>
+  icon_image <%= n['icon_image'] %>
+  <% end -%>
+  <% if n['vrml_image'] -%>
+  vrml_image <%= n['vrml_image'] %>
   <% end -%>
 }
   <% end %>
