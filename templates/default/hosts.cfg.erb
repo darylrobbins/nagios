@@ -8,6 +8,13 @@ define host {
   address <%= (node['network']["ipaddress_#{node['nagios']['monitoring_interface']}"] || node['ipaddress']) %>
   host_name <%= node['nagios']['server']['normalize_hostname'] ? node[node['nagios']['host_name_attribute']].downcase : node[node['nagios']['host_name_attribute']] %>
   hostgroups <% if node['nagios']['multi_environment_monitoring'] -%><%= node.chef_environment %>,<% end -%>all,<%= node['os'] %><% unless node['roles'].empty? -%>,<%= node['roles'].sort.join(",") %><% end -%>
+  <% if node['nagios']['definition'] -%>
+  <% if node['nagios']['definition']['parents'] -%>
+  parents <%= (node['nagios']['definition']['parents'] || []).join(',') %>
+  <% end -%>
+  <% end -%>
+  statusmap_image logos/nagios.gd2
+  icon_image logos/nagios.png
 }
 
 <% @nodes.each do |n| -%>
