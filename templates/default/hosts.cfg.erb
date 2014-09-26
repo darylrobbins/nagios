@@ -78,6 +78,9 @@ define host {
   <% if n['vrml_image'] -%>
   vrml_image <%= n['vrml_image'] %>
   <% end -%>
+  <% if n['active_checks_enabled'] -%>
+  active_checks_enabled <%= n['active_checks_enabled'] %>
+  <% end -%>
 }
   <% end %>
 <% end -%>
